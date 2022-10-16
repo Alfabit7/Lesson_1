@@ -5,9 +5,12 @@ Console.Clear();
 Console.WriteLine("enter number");
 int number = Convert.ToInt32(Console.ReadLine());
 int i = 2;
-
-while (i <= number)
+if (number < 0)
 {
-    Console.WriteLine(i);
-    i = i + 2;
+    Console.WriteLine("Введите положительное число");
 }
+else while (i <= number)
+    {
+        Console.WriteLine(i);
+        i = i + 2;
+    }
