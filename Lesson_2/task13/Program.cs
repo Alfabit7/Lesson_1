@@ -2,7 +2,7 @@
 Console.Clear();
 
 int number = new Random().Next(1, 1000);
-
+Console.WriteLine($"The generated number is: {number}");
 if (number > 99)
 {
     Console.WriteLine(number % 10);
