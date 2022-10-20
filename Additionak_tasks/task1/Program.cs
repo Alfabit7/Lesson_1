@@ -2,16 +2,18 @@
 // (n1 и n2 вводятся с клавиатуры, цикл for).
 Console.Clear();
 
-Console.Write("Enter number1: ");
-int number1 = Convert.ToInt32(Console.ReadLine());
 int count = 0;
 int result = 0;
 
+Console.Write("Enter number1: ");
+int number1 = Convert.ToInt32(Console.ReadLine());
+
 Console.Write("Enter number2: ");
 int number2 = Convert.ToInt32(Console.ReadLine());
+
 Console.WriteLine($"You enter {number1}, {number2} ");
 
-if (number1 % 2 == 0)
+if (number1 == 0)
 {
     count = number1 + 1;
     while (count <= number2)
@@ -32,3 +34,4 @@ else
     }
     Console.WriteLine($"Summ = {result}");
 }
+
