@@ -1,4 +1,4 @@
-﻿void PrintGameBoard(char[] cage)
+﻿// void PrintGameBoard(char[] cage)
 {
     Console.Clear();
     string tab = "                                                    ";
@@ -18,7 +18,7 @@
         Console.WriteLine(tab + gamecage[i]);
     }
 }
-
+/*
 void KeyPressed(ConsoleKeyInfo key, char[] cage, char mark)
 {
     switch (key.Key)
@@ -104,3 +104,4 @@ Console.Write(tab);
 if (win && turn <= 9) Console.WriteLine(whoseturn ? " Нолики победили!!" : "Крестики победили!!");
 else Console.WriteLine("   Боевая ничья!");
 Console.WriteLine();
+*/

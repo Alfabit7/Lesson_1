@@ -1,4 +1,4 @@
-﻿// Функция проверяет что вводится именно число а не буквы и число в диапазоне от 1 до 9
+﻿// Функция проверяет чтовводится именно число а не буквы и число в диапазоне от 1 до 9
 //Решение 1
 /*
 string userDigit = string.Empty;
@@ -40,6 +40,18 @@ void renderFileld(string[][] numbers)
 }
 renderFileld(numbers);
 
+// Функция проверяет что вводится именно число а не буквы и число в диапазоне от 1 до 9
+/*void checkedUserNumber()
+{
+    userDigit = Console.ReadLine();
+    while (!int.TryParse(userDigit, out number) | number > 9 | number < 1)
+    {
+        Console.WriteLine("Сделайте ход в поле нажав цифру от 1 до 9 ");
+        number = Convert.ToInt32(Console.ReadLine());
+    }
+}
+*/
+// Выбираем кто ходит первый 
 Console.WriteLine("Выберите кто ходит первый, если крестики нажмите букву х если нолики нажмите букву о");
 string whoGoesFirst = string.Empty;
 whoGoesFirst = Console.ReadLine();
@@ -50,6 +62,8 @@ while (whoGoesFirst != "o" && whoGoesFirst != "x")
     whoGoesFirst = Console.ReadLine();
 }
 renderFileld(numbers);
+
+
 
 // Крестики ходят первыми 
 if (whoGoesFirst == "x")
@@ -81,39 +95,29 @@ void checkedUserNumber()
     while (!int.TryParse(userDigit, out number) | number > 9 | number < 1)
 
     {
-        Console.Write("Сделайте ход в поле нажав цифру от 1 до 9: ");
+        Console.WriteLine("Сделайте ход в поле нажав цифру от 1 до 9 ");
         userDigit = Console.ReadLine();
     }
 }
-
-
-bool winOrLoss = false;
-
 // Свитч который проверяет какую цифру ввел пользователь
-while (moveCounter < 10 && winOrLoss != true)
+while (moveCounter < 10)
 {
-    int changeCellI = 0; // параметры функции  changeCell() которая заполняет нужную клетку ноликом или крестиком 
-    int changeCellJ = 0;
 
-    // Проверка чтобы на выигрыш
+
     switch (number)
     {
         case 1:
-
+            int changeCellI = 0; // параметры функции  changeCell() которая заполняет нужную клетку ноликом или крестиком 
+            int changeCellJ = 0;
             if (numbers[changeCellI][changeCellJ] == "x" || numbers[changeCellI][changeCellJ] == "o")
             {
+
                 checkingNextMove();
+
             }
             else
             {
-
-                // checkedWin();
-                // if (winOrLoss != true)
-                // {
-                //     changeCell(changeCellI, changeCellJ);
                 changeCell(changeCellI, changeCellJ);
-                // }
-                break;
             }
             break;
         case 2:
@@ -122,11 +126,11 @@ while (moveCounter < 10 && winOrLoss != true)
             if (numbers[changeCellI][changeCellJ] == "x" || numbers[changeCellI][changeCellJ] == "o")
             {
                 checkingNextMove();
+
             }
             else
             {
                 changeCell(changeCellI, changeCellJ);
-                break;
             }
             break;
         case 3:
@@ -139,7 +143,6 @@ while (moveCounter < 10 && winOrLoss != true)
             else
             {
                 changeCell(changeCellI, changeCellJ);
-                break;
             }
             break;
         case 4:
@@ -152,7 +155,6 @@ while (moveCounter < 10 && winOrLoss != true)
             else
             {
                 changeCell(changeCellI, changeCellJ);
-                break;
             }
             break;
         case 5:
@@ -165,7 +167,6 @@ while (moveCounter < 10 && winOrLoss != true)
             else
             {
                 changeCell(changeCellI, changeCellJ);
-                break;
             }
             break;
         case 6:
@@ -179,7 +180,6 @@ while (moveCounter < 10 && winOrLoss != true)
             else
             {
                 changeCell(changeCellI, changeCellJ);
-                break;
             }
             break;
         case 7:
@@ -192,7 +192,6 @@ while (moveCounter < 10 && winOrLoss != true)
             else
             {
                 changeCell(changeCellI, changeCellJ);
-                break;
             }
             break;
         case 8:
@@ -205,7 +204,6 @@ while (moveCounter < 10 && winOrLoss != true)
             else
             {
                 changeCell(changeCellI, changeCellJ);
-                break;
             }
             break;
         case 9:
@@ -218,51 +216,8 @@ while (moveCounter < 10 && winOrLoss != true)
             else
             {
                 changeCell(changeCellI, changeCellJ);
-                break;
             }
             break;
-
-    }
-
-}
-
-// Функция проверят выиграл кто то или еще нет 
-void checkedWin()
-{
-    if (
-      //Row
-      numbers[0][0] == "x" && numbers[0][1] == "x" && numbers[0][2] == "x" ||
-      numbers[1][0] == "x" && numbers[1][1] == "x" && numbers[1][2] == "x" ||
-      numbers[2][0] == "x" && numbers[2][1] == "x" && numbers[2][2] == "x" ||
-
-      // Colums
-      numbers[0][0] == "x" && numbers[1][0] == "x" && numbers[2][0] == "x" ||
-      numbers[0][1] == "x" && numbers[1][1] == "x" && numbers[2][1] == "x" ||
-      numbers[0][2] == "x" && numbers[1][2] == "x" && numbers[2][2] == "x" ||
-
-      // dioganal
-      numbers[0][0] == "x" && numbers[1][1] == "x" && numbers[2][2] == "x" ||
-      numbers[0][2] == "x" && numbers[1][1] == "x" && numbers[2][0] == "x"
-      )
-    {
-        winOrLoss = true;
-    }
-    if (
-      numbers[0][0] == "o" && numbers[0][1] == "o" && numbers[0][2] == "o" ||
-      numbers[1][0] == "o" && numbers[1][1] == "o" && numbers[1][2] == "o" ||
-      numbers[2][0] == "o" && numbers[2][1] == "o" && numbers[2][2] == "o" ||
-
-      // Colums
-      numbers[0][0] == "o" && numbers[1][0] == "o" && numbers[2][0] == "o" ||
-      numbers[0][1] == "o" && numbers[1][1] == "o" && numbers[2][1] == "o" ||
-      numbers[0][2] == "o" && numbers[1][2] == "o" && numbers[2][2] == "o" ||
-
-      // dioganal
-      numbers[0][0] == "o" && numbers[1][1] == "o" && numbers[2][2] == "o" ||
-      numbers[0][2] == "o" && numbers[1][1] == "o" && numbers[2][0] == "o"
-    )
-    {
-        winOrLoss = true;
     }
 }
 
@@ -271,65 +226,62 @@ void checkingNextMove()
 {
     Console.Write("Это клетка уже занята, повторите ввод: ");
     checkedUserNumber();
+
 }
 
 // Функция заполняет  клетку крестиком  или ноликом 
 void changeCell(int changeCellI, int changeCellJ)
 {
     moveCounter++;
-    // Если ходили крестики то меняем переменную crossOrToe на нолики 
+
     if (whoseMove == true && crossOrToe == "x")
     {
-        numbers[changeCellI][changeCellJ] = crossOrToe;
-        renderFileld(numbers);
-        whoseMove = false;
-        crossOrToe = "o";
-
-
-        // Проверяем есть победитель
-        checkedWin();
-        // Если нет, то запрашиваем следующий ход 
-        if (winOrLoss != true && moveCounter < 10)
+        if (moveCounter < 10)
         {
-            Console.Write("Ходит следующий игрок o: ");
+            numbers[changeCellI][changeCellJ] = crossOrToe;
+            renderFileld(numbers);
+            Console.Write("Ходит следующий игрок: ");
             checkedUserNumber();
+            whoseMove = false;
+            crossOrToe = "o";
+
         }
-        // Если есть, то выводим победитель крестики 
         else
         {
-            if (winOrLoss == true)
-            {
-                Console.WriteLine("Победили крестики ");
-            }
-            else { Console.WriteLine("Боевая ничья"); }
+            numbers[changeCellI][changeCellJ] = crossOrToe;
+            renderFileld(numbers);
         }
 
     }
+
     else
     {
-        numbers[changeCellI][changeCellJ] = crossOrToe;
-        renderFileld(numbers);
-        whoseMove = true;
-        crossOrToe = "x";
-        // Проверяем есть победитель
-        checkedWin();
 
-        if (winOrLoss != true && moveCounter < 10)
+        if (moveCounter < 10)
         {
-            Console.Write("Ходит следующий игрок x: ");
+            numbers[changeCellI][changeCellJ] = crossOrToe;
+            renderFileld(numbers);
+            Console.Write("Ходит следующий игрок: ");
             checkedUserNumber();
+            whoseMove = true;
+            crossOrToe = "x";
+
         }
-        // Если есть, то выводим победитель нолики 
         else
         {
-            if (winOrLoss == true)
-            {
-                Console.WriteLine("Победили нолики");
-            }
-
-            else { Console.WriteLine("Боевая ничья"); }
+            numbers[changeCellI][changeCellJ] = crossOrToe;
+            renderFileld(numbers);
         }
+
     }
+
 }
 
+
+
+
+
+
+
+// string whoGoesFirst = String.Empty;
 
