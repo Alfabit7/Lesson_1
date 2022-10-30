@@ -280,6 +280,7 @@ void changeCell(int changeCellI, int changeCellJ)
     // Если ходили крестики то меняем переменную crossOrToe на нолики 
     if (whoseMove == true && crossOrToe == "x")
     {
+        Console.Clear();
         numbers[changeCellI][changeCellJ] = crossOrToe;
         renderFileld(numbers);
         whoseMove = false;
@@ -307,6 +308,7 @@ void changeCell(int changeCellI, int changeCellJ)
     }
     else
     {
+        Console.Clear();
         numbers[changeCellI][changeCellJ] = crossOrToe;
         renderFileld(numbers);
         whoseMove = true;
