@@ -1,23 +1,12 @@
-﻿// Функция проверяет что вводится именно число а не буквы и число в диапазоне от 1 до 9
-//Решение 1
-/*
-string userDigit = string.Empty;
-int number = 0;
-Console.Clear();
-Console.WriteLine("enter number");
-userDigit = Console.ReadLine();
-// while (int.TryParse(number, out int userDigit) || userDigit < 9)
-while (!int.TryParse(userDigit, out number) | number > 9 | number < 1)
-{
-    Console.WriteLine("enter the number again");
-    userDigit = Console.ReadLine();
-}*/
-//=============================== не трогать проверка ввода числа от 1 до 9 
-string userDigit = string.Empty;
-int number = 0;
+﻿// Переменные 
+string userDigit = string.Empty; // переменная string которая хранит число которое вводит пользователь для проверки что это число, а не строка используется в функции checkedUserNumber
+int number = 0;// number переменая int которая хранит число которое ввел пользователь   используется в функции checkedUserNumber  
+
 int moveCounter = 1; //Счетчик ходов не больше 9 
 bool whoseMove = false; // меняем значение в зависимости от того чей ход true крестики false нолики 
 string crossOrToe = "o"; // переменная которая меняет клетку на нолик или крестик в зависимости от того кто ходит
+string whoGoesFirst = string.Empty; // запоминает выбор фигуры игрока который будет ходить первым 
+bool winOrLoss = false; // если значение true то значит кто-то победил
 
 // Двухмерный массив для отрисовки поля
 string[][] numbers = new string[3][];
@@ -38,41 +27,6 @@ void renderFileld(string[][] numbers)
         Console.WriteLine();
     }
 }
-renderFileld(numbers);
-
-Console.WriteLine("Выберите кто ходит первый, если крестики нажмите букву х если нолики нажмите букву о");
-string whoGoesFirst = string.Empty;
-whoGoesFirst = Console.ReadLine();
-
-while (whoGoesFirst != "o" && whoGoesFirst != "x")
-{
-    Console.WriteLine("Выберите кто ходит первый крестик нажмите букву х или нолики нажмите букву о");
-    whoGoesFirst = Console.ReadLine();
-}
-renderFileld(numbers);
-
-// Крестики ходят первыми 
-if (whoGoesFirst == "x")
-{
-    whoseMove = true;
-    crossOrToe = "x";
-    Console.Clear();
-    Console.WriteLine("Первыми ходят крестики");
-    Console.WriteLine();
-    renderFileld(numbers);
-    Console.Write("Введите номер клетки: ");
-    checkedUserNumber();
-}
-// Нолики  ходят первыми 
-else if (whoGoesFirst == "o")
-{
-    whoseMove = false;
-    crossOrToe = "o";
-    Console.WriteLine("Первыми ходят нолики");
-    Console.WriteLine();
-    Console.Write("Введите номер клетки: ");
-    checkedUserNumber();
-}
 
 // Функция проверяет что вводится именно число а не буквы и число в диапазоне от 1 до 9
 void checkedUserNumber()
@@ -86,33 +40,168 @@ void checkedUserNumber()
     }
 }
 
+// Функция проверят выиграл кто то или еще нет 
+void checkedWin()
+{
+    if (
+      //Row
+      numbers[0][0] == "x" && numbers[0][1] == "x" && numbers[0][2] == "x" ||
+      numbers[1][0] == "x" && numbers[1][1] == "x" && numbers[1][2] == "x" ||
+      numbers[2][0] == "x" && numbers[2][1] == "x" && numbers[2][2] == "x" ||
 
-bool winOrLoss = false;
+      // Colums
+      numbers[0][0] == "x" && numbers[1][0] == "x" && numbers[2][0] == "x" ||
+      numbers[0][1] == "x" && numbers[1][1] == "x" && numbers[2][1] == "x" ||
+      numbers[0][2] == "x" && numbers[1][2] == "x" && numbers[2][2] == "x" ||
+
+      // dioganal
+      numbers[0][0] == "x" && numbers[1][1] == "x" && numbers[2][2] == "x" ||
+      numbers[0][2] == "x" && numbers[1][1] == "x" && numbers[2][0] == "x"
+      )
+    {
+        winOrLoss = true;
+    }
+    if (
+      numbers[0][0] == "o" && numbers[0][1] == "o" && numbers[0][2] == "o" ||
+      numbers[1][0] == "o" && numbers[1][1] == "o" && numbers[1][2] == "o" ||
+      numbers[2][0] == "o" && numbers[2][1] == "o" && numbers[2][2] == "o" ||
+
+      // Colums
+      numbers[0][0] == "o" && numbers[1][0] == "o" && numbers[2][0] == "o" ||
+      numbers[0][1] == "o" && numbers[1][1] == "o" && numbers[2][1] == "o" ||
+      numbers[0][2] == "o" && numbers[1][2] == "o" && numbers[2][2] == "o" ||
+
+      // dioganal
+      numbers[0][0] == "o" && numbers[1][1] == "o" && numbers[2][2] == "o" ||
+      numbers[0][2] == "o" && numbers[1][1] == "o" && numbers[2][0] == "o"
+    )
+    {
+        winOrLoss = true;
+    }
+}
+
+// Функция проверяет доступен ли ход в клетку или нет  (вызывается в  свитче)
+void checkingNextMove()
+{
+    Console.Write("Это клетка уже занята, повторите ввод: ");
+    checkedUserNumber();
+}
+
+// Функция заполняет  клетку крестиком  или ноликом  ( вызывается в  свитче)
+void changeCell(int changeCellI, int changeCellJ)
+{
+    moveCounter++;
+    // Если ходили крестики то меняем переменную crossOrToe на нолики 
+    if (whoseMove == true && crossOrToe == "x")
+    {
+        Console.Clear();
+        numbers[changeCellI][changeCellJ] = crossOrToe;
+        renderFileld(numbers); // функция отрисовывает поле
+        whoseMove = false;
+        crossOrToe = "o";
+
+
+
+        checkedWin();  // функция проверяет есть победитель 
+        // Если победителя нет и ходы еще есть (moveCounter < 10) то запрашиваем след. ход
+        if (winOrLoss != true && moveCounter < 10)
+        {
+            Console.Write("Ходит следующий игрок o: ");
+            checkedUserNumber(); // Функция проверяет чтобы пользователь ввел число вдиапазоне от 1 до 9 а не буквы  итд
+        }
+        else
+        {
+            if (winOrLoss == true)
+            {// Проверяем что есть победитель а не закончились ходы и получилась ничья 
+                Console.WriteLine("Победили крестики ");
+            }
+            else { Console.WriteLine("Боевая ничья"); }
+        }
+
+    }
+    else
+    {
+        Console.Clear();
+        numbers[changeCellI][changeCellJ] = crossOrToe;
+        renderFileld(numbers); // функция отрисовывает поле
+        whoseMove = true;
+        crossOrToe = "x";
+        checkedWin(); //  функция проверяет есть победитель 
+
+        // Если победителя нет и ходы еще есть (moveCounter < 10) то запрашиваем след. ход
+        if (winOrLoss != true && moveCounter < 10)
+        {
+            Console.Write("Ходит следующий игрок x: ");
+            checkedUserNumber();// Функция проверяет чтобы пользователь ввел число в диапазоне от 1 до 9 а не буквы  итд
+        }
+
+        else
+        { // Проверяем что есть победитель а не закончились ходы и получилась ничья 
+            if (winOrLoss == true)
+            {
+                Console.WriteLine("Победили нолики");
+            }
+            else { Console.WriteLine("Боевая ничья"); }
+        }
+    }
+}
+
+
+
+// предлагаем выбор какой играть 
+Console.WriteLine("Выберите фигуру для игры, если крестики нажмите букву х если нолики нажмите букву о");
+whoGoesFirst = Console.ReadLine();
+
+// пока пользователь не введет х или о будет запрашиваать ввод 
+while (whoGoesFirst != "o" && whoGoesFirst != "x")
+{
+    Console.WriteLine("Выберите фигуру для игры, если крестики нажмите букву х если нолики нажмите букву о");
+    whoGoesFirst = Console.ReadLine(); // запоминает выбор фигуры игрока который будет ходить первым 
+}
+// функция отрисовывает поле
+renderFileld(numbers);
+
+// Провеярем если пигрок ввел "x" то крестики ходят первыми 
+if (whoGoesFirst == "x")
+{
+    whoseMove = true;
+    crossOrToe = "x";
+    Console.Clear();
+    Console.WriteLine("Первыми ходят крестики");
+    Console.WriteLine();
+    renderFileld(numbers);
+    Console.Write("Введите номер клетки: ");
+    checkedUserNumber();
+}
+// Провеярем если пигрок ввел "o" то нолики ходят первыми 
+else if (whoGoesFirst == "o")
+{
+    whoseMove = false;
+    crossOrToe = "o";
+    Console.WriteLine("Первыми ходят нолики");
+    Console.WriteLine();
+    Console.Write("Введите номер клетки: ");
+    checkedUserNumber();
+}
+
 
 // Свитч который проверяет какую цифру ввел пользователь
 while (moveCounter < 10 && winOrLoss != true)
 {
-    int changeCellI = 0; // параметры функции  changeCell() которая заполняет нужную клетку ноликом или крестиком 
+    int changeCellI = 0; // параметры функции  changeCell() которая заполняет нужную клетку (массив numbers )ноликом или крестиком 
     int changeCellJ = 0;
 
-    // Проверка чтобы на выигрыш
-    switch (number)
+    switch (number) // number переменая int которая хранит число которое ввел пользователь 
     {
         case 1:
 
             if (numbers[changeCellI][changeCellJ] == "x" || numbers[changeCellI][changeCellJ] == "o")
             {
-                checkingNextMove();
+                checkingNextMove(); // функция проверят что пользователь не пытается ввести клетку в которую сделан вход
             }
             else
             {
-
-                // checkedWin();
-                // if (winOrLoss != true)
-                // {
-                //     changeCell(changeCellI, changeCellJ);
-                changeCell(changeCellI, changeCellJ);
-                // }
+                changeCell(changeCellI, changeCellJ); // функция изменят клетку на нолик или крестик 
                 break;
             }
             break;
@@ -226,112 +315,6 @@ while (moveCounter < 10 && winOrLoss != true)
 
 }
 
-// Функция проверят выиграл кто то или еще нет 
-void checkedWin()
-{
-    if (
-      //Row
-      numbers[0][0] == "x" && numbers[0][1] == "x" && numbers[0][2] == "x" ||
-      numbers[1][0] == "x" && numbers[1][1] == "x" && numbers[1][2] == "x" ||
-      numbers[2][0] == "x" && numbers[2][1] == "x" && numbers[2][2] == "x" ||
 
-      // Colums
-      numbers[0][0] == "x" && numbers[1][0] == "x" && numbers[2][0] == "x" ||
-      numbers[0][1] == "x" && numbers[1][1] == "x" && numbers[2][1] == "x" ||
-      numbers[0][2] == "x" && numbers[1][2] == "x" && numbers[2][2] == "x" ||
-
-      // dioganal
-      numbers[0][0] == "x" && numbers[1][1] == "x" && numbers[2][2] == "x" ||
-      numbers[0][2] == "x" && numbers[1][1] == "x" && numbers[2][0] == "x"
-      )
-    {
-        winOrLoss = true;
-    }
-    if (
-      numbers[0][0] == "o" && numbers[0][1] == "o" && numbers[0][2] == "o" ||
-      numbers[1][0] == "o" && numbers[1][1] == "o" && numbers[1][2] == "o" ||
-      numbers[2][0] == "o" && numbers[2][1] == "o" && numbers[2][2] == "o" ||
-
-      // Colums
-      numbers[0][0] == "o" && numbers[1][0] == "o" && numbers[2][0] == "o" ||
-      numbers[0][1] == "o" && numbers[1][1] == "o" && numbers[2][1] == "o" ||
-      numbers[0][2] == "o" && numbers[1][2] == "o" && numbers[2][2] == "o" ||
-
-      // dioganal
-      numbers[0][0] == "o" && numbers[1][1] == "o" && numbers[2][2] == "o" ||
-      numbers[0][2] == "o" && numbers[1][1] == "o" && numbers[2][0] == "o"
-    )
-    {
-        winOrLoss = true;
-    }
-}
-
-// Функция проверяет доступен ли ход в клетку или нет  
-void checkingNextMove()
-{
-    Console.Write("Это клетка уже занята, повторите ввод: ");
-    checkedUserNumber();
-}
-
-// Функция заполняет  клетку крестиком  или ноликом 
-void changeCell(int changeCellI, int changeCellJ)
-{
-    moveCounter++;
-    // Если ходили крестики то меняем переменную crossOrToe на нолики 
-    if (whoseMove == true && crossOrToe == "x")
-    {
-        Console.Clear();
-        numbers[changeCellI][changeCellJ] = crossOrToe;
-        renderFileld(numbers);
-        whoseMove = false;
-        crossOrToe = "o";
-
-
-        // Проверяем есть победитель
-        checkedWin();
-        // Если нет, то запрашиваем следующий ход 
-        if (winOrLoss != true && moveCounter < 10)
-        {
-            Console.Write("Ходит следующий игрок o: ");
-            checkedUserNumber();
-        }
-        // Если есть, то выводим победитель крестики 
-        else
-        {
-            if (winOrLoss == true)
-            {
-                Console.WriteLine("Победили крестики ");
-            }
-            else { Console.WriteLine("Боевая ничья"); }
-        }
-
-    }
-    else
-    {
-        Console.Clear();
-        numbers[changeCellI][changeCellJ] = crossOrToe;
-        renderFileld(numbers);
-        whoseMove = true;
-        crossOrToe = "x";
-        // Проверяем есть победитель
-        checkedWin();
-
-        if (winOrLoss != true && moveCounter < 10)
-        {
-            Console.Write("Ходит следующий игрок x: ");
-            checkedUserNumber();
-        }
-        // Если есть, то выводим победитель нолики 
-        else
-        {
-            if (winOrLoss == true)
-            {
-                Console.WriteLine("Победили нолики");
-            }
-
-            else { Console.WriteLine("Боевая ничья"); }
-        }
-    }
-}
 
 
