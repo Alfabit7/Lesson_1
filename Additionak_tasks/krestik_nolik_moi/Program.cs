@@ -1,6 +1,6 @@
 ﻿// Переменные 
 string userDigit = string.Empty; // переменная string которая хранит число которое вводит пользователь для проверки что это число, а не строка используется в функции checkedUserNumber
-int number = 0;// number переменая int которая хранит число которое ввел пользователь   используется в функции checkedUserNumber  
+int number = 0;// number переменая int которая хранит число которое ввел пользователь  используется в функции checkedUserNumber  
 
 int moveCounter = 1; //Счетчик ходов не больше 9 
 bool whoseMove = false; // меняем значение в зависимости от того чей ход true крестики false нолики 
