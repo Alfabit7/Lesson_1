@@ -13,8 +13,7 @@ double[] createArray(int size)
 
     for (int i = 0; i < array.Length; i++)
     {
-        double randomElementArr = Math.Round((new Random().NextDouble() * 10), 2);
-        array[i] = randomElementArr;
+        array[i] = Math.Round((new Random().NextDouble() * 10), 2);
     }
     return array;
 }
@@ -25,25 +24,23 @@ Console.WriteLine("Source array: " + String.Join(" - ", myArr));
 
 double findMinMaxElements(double[] arr)
 {
-    int i = 0;
-    double min = arr[i];
-    double max = arr[i];
+    int i = 1;
+    double min = arr[0];
+    double max = arr[0];
     double result = 0;
 
     while (i < arr.Length)
+    {
         if (arr[i] > max)
         {
             max = arr[i];
-            i++;
         }
-        else
+        else if (arr[i] < min)
         {
-            if (arr[i] < min)
-            {
-                min = arr[i];
-            }
-            else { i++; }
+            min = arr[i];
         }
+        i++;
+    }
 
     result = Math.Round(max - min, 2);
     Console.WriteLine();

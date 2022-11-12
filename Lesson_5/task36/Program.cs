@@ -8,8 +8,7 @@ int[] createArray(int size, int start, int end)
 
     for (int i = 0; i < array.Length; i++)
     {
-        int randomElementArr = new Random().Next(start, end);
-        array[i] = randomElementArr;
+        array[i] = new Random().Next(start, end);
     }
     return array;
 }
