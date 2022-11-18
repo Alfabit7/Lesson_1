@@ -142,17 +142,17 @@ int[] ResultArray(int[] array)
 
 
 
-int[] CreateRandomArray(int N, int start, int end)
-{
-    int[] RandomArray = new int[N];
-    for (int i = 0; i < N; i++)
-    {
-        RandomArray[i] = new Random().Next(start, end + 1);
-    }
-    return RandomArray;
-}
-CreateRandomArray(7, 1, 10);
-Console.WriteLine(String.Join(" ", CreateRandomArray(7, 1, 10)));
+// int[] CreateRandomArray(int N, int start, int end)
+// {
+//     int[] RandomArray = new int[N];
+//     for (int i = 0; i < N; i++)
+//     {
+//         RandomArray[i] = new Random().Next(start, end + 1);
+//     }
+//     return RandomArray;
+// }
+// CreateRandomArray(7, 1, 10);
+// Console.WriteLine(String.Join(" ", CreateRandomArray(7, 1, 10)));
 
 // С семинара
 /*
@@ -210,3 +210,188 @@ int[] ReversArray2(int[] inArray)
 // 3-> 11
 // 2-> 10
 
+/*С семинар
+// Console.Clear();
+
+Console.Write("Введите количество строк массива: ");
+int rows = int.Parse(Console.ReadLine());
+
+Console.Write("Введите количество столбцов массива: ");
+int columns = int.Parse(Console.ReadLine());
+
+double[,] array = GetArray(rows, columns, 0, 10);
+PrintArray(array);
+
+double[,] GetArray(int m, int n, int min, int max)
+{
+    double[,] result = new double[m, n];
+    for (int i = 0; i < m; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            result[i, j] = new Random().NextDouble() * (max - min);
+        }
+    }
+    return result;
+}
+
+void PrintArray(double[,] inArray)
+{
+    for (int i = 0; i < inArray.GetLength(0); i++)
+    {
+        for (int j = 0; j < inArray.GetLength(1); j++)
+        {
+            Console.Write($"{inArray[i, j]:f5} ");
+        }
+        Console.WriteLine();
+    }
+}
+
+
+*/
+
+// Console.Clear();
+// Задача 48: Задайте двумерный массив размера m на n, каждый элемент в массиве находится по формуле: Aₘₙ = m+n. Выведите полученный массив на экран.
+
+// Console.Write("Введите количество строк массива: ");
+// int rows = int.Parse(Console.ReadLine());
+
+// Console.Write("Введите количество столбцов массива: ");
+// int columns = int.Parse(Console.ReadLine());
+
+// int[,] array = GetArray(rows, columns, 0, 10);
+// PrintArray(array);
+// int[,] GetArray(int m, int n, int min, int max)
+// {
+//     int[,] result = new int[m, n];
+//     for (int i = 0; i < m; i++)
+//     {
+//         for (int j = 0; j < n; j++)
+//         {
+//             result[i, j] = i + j;
+//         }
+//     }
+//     return result;
+// }
+
+
+// void PrintArray(int[,] inArray)
+// {
+//     for (int i = 0; i < inArray.GetLength(0); i++)
+//     {
+//         for (int j = 0; j < inArray.GetLength(1); j++)
+//         {
+//             Console.Write($"{inArray[i, j]} ");
+//         }
+//         Console.WriteLine();
+//     }
+// }
+
+
+// Задача 49: Задайте двумерный массив. Найдите элементы, у которых оба индекса чётные, и замените эти элементы на их квадраты.
+
+// Console.Write("Введите количество строк массива: ");
+// int rows = int.Parse(Console.ReadLine());
+
+// Console.Write("Введите количество столбцов массива: ");
+// int columns = int.Parse(Console.ReadLine());
+
+// int[,] array = GetArray(rows, columns, 0, 10);
+
+
+// int[,] GetArray(int m, int n, int min, int max)
+// {
+//     int[,] result = new int[m, n];
+//     for (int i = 0; i < m; i++)
+//     {
+//         for (int j = 0; j < n; j++)
+//         {
+//             result[i, j] = new Random().Next(min, max);
+//         }
+//     }
+//     return result;
+// }
+
+// void CheckArray(int[,] array)
+// {
+//     for (int i = 0; i < array.GetLength(0); i++)
+//     {
+//         for (int j = 0; j < array.GetLength(1); j++)
+//         {
+//             if (i % 2 == 0 && j % 2 == 0)
+//             {
+//                 array[i, j] = array[i, j] * array[i, j];
+//             }
+//         }
+//     }
+// }
+// void PrintArray(int[,] inArray)
+// {
+//     for (int i = 0; i < inArray.GetLength(0); i++)
+//     {
+//         for (int j = 0; j < inArray.GetLength(1); j++)
+//         {
+//             Console.Write($"{inArray[i, j]} ");
+//         }
+//         Console.WriteLine();
+//     }
+// }
+
+// PrintArray(array);
+// CheckArray(array);
+// Console.WriteLine();
+// PrintArray(array);
+
+
+
+
+
+// Задача 51: Задайте двумерный массив. Найдите сумму элементов, находящихся на главной диагонали (с индексами (0,0); (1;1) и т.д.
+Console.Write("Введите количество строк массива: ");
+int rows = int.Parse(Console.ReadLine());
+
+Console.Write("Введите количество столбцов массива: ");
+int columns = int.Parse(Console.ReadLine());
+
+int[,] array = GetArray(rows, columns, 0, 10);
+
+int sum;
+int[,] GetArray(int m, int n, int min, int max)
+{
+    sum = 0;
+    int[,] result = new int[m, n];
+    for (int i = 0; i < m; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            result[i, j] = new Random().Next(min, max);
+            if (i == j)
+            {
+                sum = sum + result[i, j];
+            }
+
+        }
+
+    }
+    return result;
+}
+void PrintArray(int[,] inArray)
+{
+    for (int i = 0; i < inArray.GetLength(0); i++)
+    {
+        for (int j = 0; j < inArray.GetLength(1); j++)
+        {
+            Console.Write($"{inArray[i, j]} ");
+        }
+        Console.WriteLine();
+    }
+}
+
+PrintArray(array);
+
+Console.WriteLine();
+
+Console.WriteLine(sum);
+// https://docs.google.com/presentation/d/1LiZVEdhHYOEm_xpFU7XIWJl8eLskHXC1vSQjw9fz90E/edit#slide=id.g10f07d28dee_0_221
+
+// https://drive.google.com/file/d/1AMYk45d4dpJCqHscJ6doUHjG5EqTRWB4/view
