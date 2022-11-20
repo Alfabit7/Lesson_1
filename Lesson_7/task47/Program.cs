@@ -38,7 +38,6 @@ void PrintArray(double[,] array)
             for (int j = 0; j < n; j++)
             {
                 Console.Write($"{array[i, j],7:f1} ");
-
             }
             Console.WriteLine();
             Console.WriteLine();
