@@ -347,51 +347,126 @@ void PrintArray(double[,] inArray)
 
 
 // Задача 51: Задайте двумерный массив. Найдите сумму элементов, находящихся на главной диагонали (с индексами (0,0); (1;1) и т.д.
-Console.Write("Введите количество строк массива: ");
-int rows = int.Parse(Console.ReadLine());
+// Console.Write("Введите количество строк массива: ");
+// int rows = int.Parse(Console.ReadLine());
 
-Console.Write("Введите количество столбцов массива: ");
-int columns = int.Parse(Console.ReadLine());
+// Console.Write("Введите количество столбцов массива: ");
+// int columns = int.Parse(Console.ReadLine());
 
-int[,] array = GetArray(rows, columns, 0, 10);
+// int[,] array = GetArray(rows, columns, 0, 10);
 
-int sum;
-int[,] GetArray(int m, int n, int min, int max)
+// int sum;
+// int[,] GetArray(int m, int n, int min, int max)
+// {
+//     sum = 0;
+//     int[,] result = new int[m, n];
+//     for (int i = 0; i < m; i++)
+//     {
+//         for (int j = 0; j < n; j++)
+//         {
+//             result[i, j] = new Random().Next(min, max);
+//             if (i == j)
+//             {
+//                 sum = sum + result[i, j];
+//             }
+
+//         }
+
+//     }
+//     return result;
+// }
+// void PrintArray(int[,] inArray)
+// {
+//     for (int i = 0; i < inArray.GetLength(0); i++)
+//     {
+//         for (int j = 0; j < inArray.GetLength(1); j++)
+//         {
+//             Console.Write($"{inArray[i, j]} ");
+//         }
+//         Console.WriteLine();
+//     }
+// }
+
+// PrintArray(array);
+
+// Console.WriteLine();
+
+// Console.WriteLine(sum);
+// https://docs.google.com/presentation/d/1LiZVEdhHYOEm_xpFU7XIWJl8eLskHXC1vSQjw9fz90E/edit#slide=id.g10f07d28dee_0_221
+
+// https://drive.google.com/file/d/1AMYk45d4dpJCqHscJ6doUHjG5EqTRWB4/view
+
+
+// Задача 52 
+// +++++++++++++++++++++++++++++++++++++++++++++++
+
+
+
+
+Console.Clear();
+// int randomRow = 7;
+// int randomColumn = 7;
+
+int randomRow = new Random().Next(3, 10);
+int randomColumn = new Random().Next(2, 10);
+
+double[,] newArr = CreateRandomArray(randomRow, randomColumn);
+PrintArray(newArr);
+double[] result = SearchArithmeticMean(newArr);
+double n;
+
+Console.Write($"Среднее арифмитическое чисел в столбце равно: ");
+
+foreach (double i in result)
 {
-    sum = 0;
-    int[,] result = new int[m, n];
-    for (int i = 0; i < m; i++)
-    {
-        for (int j = 0; j < n; j++)
-        {
-            result[i, j] = new Random().Next(min, max);
-            if (i == j)
-            {
-                sum = sum + result[i, j];
-            }
-
-        }
-
-    }
-    return result;
+    Console.Write($"{(i / result.Length),3:f2}; ");
 }
-void PrintArray(int[,] inArray)
+
+
+
+//Функция создания массива рандомных размеров  от randomRow строк  до randomColumn столбцов
+double[,] CreateRandomArray(int rows, int columns)
 {
-    for (int i = 0; i < inArray.GetLength(0); i++)
+    double[,] array = new double[rows, columns];
+    for (int i = 0; i < rows; i++)
     {
-        for (int j = 0; j < inArray.GetLength(1); j++)
+        for (int j = 0; j < columns; j++)
         {
-            Console.Write($"{inArray[i, j]} ");
+            array[i, j] = new Random().Next(0, 10);
         }
+    }
+    return array;
+}
+//  Функция вывода массива в консоль  
+void PrintArray(double[,] array)
+{
+    Console.Clear();
+    for (int i = 0; i < array.GetLength(0); i++)
+    {
+        for (int j = 0; j < array.GetLength(1); j++)
+        {
+            Console.Write(array[i, j] + " ");
+        }
+        Console.WriteLine();
         Console.WriteLine();
     }
 }
 
-PrintArray(array);
+// Функция суммирует все элементы входящего массива по столбцу, и эту сумму записывает как элемент нового возвращаемого массива
+double[] SearchArithmeticMean(double[,] array)
+{
+    double sum = 0;
+    double[] arithmeticMean = new double[array.GetLength(1)];
+    for (int i = 0; i < array.GetLength(1); i++)
+    {
+        for (int j = 0; j < array.GetLength(0); j++)
+        {
+            sum = sum + Convert.ToInt32(array[j, i]);
+        }
+        arithmeticMean[i] = sum;
+        sum = 0;
+    }
+    return arithmeticMean;
+}
 
-Console.WriteLine();
 
-Console.WriteLine(sum);
-// https://docs.google.com/presentation/d/1LiZVEdhHYOEm_xpFU7XIWJl8eLskHXC1vSQjw9fz90E/edit#slide=id.g10f07d28dee_0_221
-
-// https://drive.google.com/file/d/1AMYk45d4dpJCqHscJ6doUHjG5EqTRWB4/view

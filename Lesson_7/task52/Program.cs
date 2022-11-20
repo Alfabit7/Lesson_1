@@ -1,27 +1,30 @@
-﻿// Задача 52: Задайте двумерный массив из целых чисел. Найдите среднее арифметическое элементов в каждом столбце.
-// Например, задан массив:
-// 1 4 7 2
-// 5 9 2 3
-// 8 4 2 4
-// Среднее арифметическое каждого столбца: 4,6; 5,6; 3,6; 3.
+﻿Console.Clear();
+/*
+Задача 52.Задайте двумерный массив из целых чисел. Найдите среднее арифметическое элементов в каждом столбце.
+Например, задан массив:
+1 4 7 2
+5 9 2 3
+8 4 2 4
+Среднее арифметическое каждого столбца: 4,6; 5,6; 3,6; 3.
+*/
+int randomRow = new Random().Next(3, 10);
+int randomColumn = new Random().Next(2, 10);
 
-Console.Clear();
-// int randomRow = new Random().Next(3, 7);
-// int randomColumn = new Random().Next(3, 7);
-int randomRow = 5;
-int randomColumn = 5;
 double[,] newArr = CreateRandomArray(randomRow, randomColumn);
 PrintArray(newArr);
-int n = newArr.GetLength(1);
-double[] arithmeticMean = new double[n];
-Console.WriteLine($"newArr.GetLength(1) = {newArr.GetLength(1)}");
-Console.WriteLine($"newArr.GetLength(0) = {newArr.GetLength(0)}");
 double[] result = SearchArithmeticMean(newArr);
+double n;
+
+Console.Write($"Среднее арифмитическое чисел в столбце равно: ");
+
+foreach (double i in result)
+{
+    Console.Write($"{(i / result.Length),3:f2}; ");
+}
 
 
 
-
-//Функиця создания массива рандомных размеров  от randomRow строк  до randomColumn столбцов
+//Функция создания массива рандомных размеров  от randomRow строк  до randomColumn столбцов
 double[,] CreateRandomArray(int rows, int columns)
 {
     double[,] array = new double[rows, columns];
@@ -34,11 +37,10 @@ double[,] CreateRandomArray(int rows, int columns)
     }
     return array;
 }
-//  Функция вывода в консоль массива 
+//  Функция вывода массива в консоль  
 void PrintArray(double[,] array)
 {
     Console.Clear();
-    // Console.Write("------------");
     for (int i = 0; i < array.GetLength(0); i++)
     {
         for (int j = 0; j < array.GetLength(1); j++)
@@ -54,27 +56,15 @@ void PrintArray(double[,] array)
 double[] SearchArithmeticMean(double[,] array)
 {
     double sum = 0;
-    for (int i = 0; i < array.GetLength(0); i++)
+    double[] arithmeticMean = new double[array.GetLength(1)];
+    for (int i = 0; i < array.GetLength(1); i++)
     {
-        for (int j = 0; j < array.GetLength(1); j++)
+        for (int j = 0; j < array.GetLength(0); j++)
         {
-            // Console.Write($" sum = sum {sum} + array {array[j, i]}= {(sum = sum + array[j, i])}");
             sum = sum + Convert.ToInt32(array[j, i]);
-            // Console.Write($"{array.GetLength(0)}");
         }
         arithmeticMean[i] = sum;
         sum = 0;
-        // Console.WriteLine($"{array.GetLength(1)}");
     }
     return arithmeticMean;
 }
-
-
-Console.Write($"Среднее арифмитическое чисел в столбце равно: ");
-foreach (int i in result)
-{
-
-    Console.Write($"{(i / 2)}; ");
-}
-
-
