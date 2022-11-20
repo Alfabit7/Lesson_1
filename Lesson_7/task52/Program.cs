@@ -7,21 +7,26 @@
 8 4 2 4
 Среднее арифметическое каждого столбца: 4,6; 5,6; 3,6; 3.
 */
-int randomRow = new Random().Next(3, 10);
-int randomColumn = new Random().Next(2, 10);
+// Создаем рандомные значения строк и столбцов для последующего создания двумерного массива 
+int randomRow = new Random().Next(2, 5);
+int randomColumn = new Random().Next(2, 5);
 
+// Функция создает рандомный двумерный массив newArr из randomRow строк  и randomColumn столбцов
 double[,] newArr = CreateRandomArray(randomRow, randomColumn);
+
+// Функция принимает двумерный массив и выводит его на экран
 PrintArray(newArr);
+
+// Функция суммирует все элементы входящего массива по каждому столбцу и находит среднее арифметическое столбца, это  ср. арифм.  записывает как элемент нового возвращаемого массива
 double[] result = SearchArithmeticMean(newArr);
-double n;
 
 Console.Write($"Среднее арифмитическое чисел в столбце равно: ");
 
+// Проходим циклом по массиву полученному от функции  SearchArithmeticMean и вводим значение на экран
 foreach (double i in result)
 {
-    Console.Write($"{(i / result.Length),3:f2}; ");
+    Console.Write($"{(i),5:f2}; ");
 }
-
 
 
 //Функция создания массива рандомных размеров  от randomRow строк  до randomColumn столбцов
@@ -52,7 +57,7 @@ void PrintArray(double[,] array)
     }
 }
 
-// Функция суммирует все элементы входящего массива по столбцу, и эту сумму записывает как элемент нового возвращаемого массива
+// Функция суммирует все элементы входящего массива по каждому столбцу и находит среднее арифметическое столбца, это  ср. арифм.  записывает как элемент нового возвращаемого массива
 double[] SearchArithmeticMean(double[,] array)
 {
     double sum = 0;
@@ -61,8 +66,9 @@ double[] SearchArithmeticMean(double[,] array)
     {
         for (int j = 0; j < array.GetLength(0); j++)
         {
-            sum = sum + Convert.ToInt32(array[j, i]);
+            sum = (sum + Convert.ToInt32(array[j, i]));
         }
+        sum = sum / array.GetLength(0);
         arithmeticMean[i] = sum;
         sum = 0;
     }

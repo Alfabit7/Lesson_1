@@ -55,9 +55,7 @@ void FindElementtoArr(int row, int column)
     row -= 1; column -= 1;// чтобы пользователь вводил числа начиная с 1
     if (row <= newArr.GetLength(0) && column <= newArr.GetLength(1))
     {
-        Color("white");
         Console.Write($"Элемент в строке {row} и столбце {column} равен: {newArr[row, column]} ");
-
     }
     else
     {
@@ -73,15 +71,4 @@ void FindElementtoArr(int row, int column)
 
 FindElementtoArr(findRow, findColumn);
 
-void Color(string color)
-{
-    if (color == "green") Console.ForegroundColor = ConsoleColor.Green;
-    else if (color == "red") Console.ForegroundColor = ConsoleColor.Red;
-    else if (color == "yellow") Console.ForegroundColor = ConsoleColor.Yellow;
-    else if (color == "cyan") Console.ForegroundColor = ConsoleColor.Cyan;
-    else if (color == "magenta") Console.ForegroundColor = ConsoleColor.Magenta;
-    else if (color == "black") Console.ForegroundColor = ConsoleColor.Black;
-    else if (color == "white") Console.ForegroundColor = ConsoleColor.White;
-    else if (color == "gray") Console.ForegroundColor = ConsoleColor.Gray;
-}
 
