@@ -8,6 +8,7 @@ int findRow;
 int findColumn;
 int randomRow;
 int randomColumn;
+
 // Повтор запроса поиска элемента, используем функцию если  элемента не существует в массиве
 void RepeatRequest()
 {
@@ -21,6 +22,7 @@ void RepeatRequest()
 // Вызываем запрос поиска  первый раз
 RepeatRequest();
 
+int[,] newArr = CreateRandomArray(randomRow, randomColumn);
 int[,] CreateRandomArray(int rows, int columns)
 {
     int[,] array = new int[rows, columns];
@@ -33,7 +35,7 @@ int[,] CreateRandomArray(int rows, int columns)
     }
     return array;
 }
-int[,] newArr = CreateRandomArray(randomRow, randomColumn);
+
 
 //Печать массива
 PrintArray(newArr);
@@ -49,26 +51,25 @@ void PrintArray(int[,] array)
         Console.WriteLine();
     }
 }
-// поиск значение элеменат в массиве
-void FindElementtoArr(int row, int column)
+// поиск значение элемента в массиве
+void FindElementToArr(int row, int column)
 {
     row -= 1; column -= 1;// чтобы пользователь вводил числа начиная с 1
-    if (row <= newArr.GetLength(0) && column <= newArr.GetLength(1))
+    if (row < newArr.GetLength(0) && column < newArr.GetLength(1))
     {
         Console.Write($"Элемент в строке {row} и столбце {column} равен: {newArr[row, column]} ");
     }
     else
     {
-
         Console.Write($"Поиск не соответствует размерам массива задайте числа больше либо меньше");
         Console.WriteLine();
         RepeatRequest();
         newArr = CreateRandomArray(randomRow, randomColumn);
         PrintArray(newArr);
-        FindElementtoArr(findRow, findColumn);
+        FindElementToArr(findRow, findColumn);
     }
 }
 
-FindElementtoArr(findRow, findColumn);
+FindElementToArr(findRow, findColumn);
 
 

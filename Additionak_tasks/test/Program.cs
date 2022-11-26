@@ -400,8 +400,7 @@ void PrintArray(double[,] inArray)
 // Задача 52 
 // +++++++++++++++++++++++++++++++++++++++++++++++
 
-
-
+/*
 
 Console.Clear();
 // int randomRow = 7;
@@ -470,3 +469,142 @@ double[] SearchArithmeticMean(double[,] array)
 }
 
 
+*/
+/*
+
+// Задача 53: Задайте двумерный массив. Напишите программу, которая поменяет местами первую и последнюю строку массива.
+Console.Clear();
+int randomRow = 7;
+int randomColumn = 7;
+
+// int randomRow = new Random().Next(3, 10);
+// int randomColumn = new Random().Next(2, 10);
+
+int[,] CreateRandomArray(int rows, int columns)
+{
+    int[,] array = new int[rows, columns];
+    for (int i = 0; i < rows; i++)
+    {
+        for (int j = 0; j < columns; j++)
+        {
+            array[i, j] = new Random().Next(0, 10);
+        }
+    }
+    return array;
+}
+
+
+int[,] newArr = CreateRandomArray(randomRow, randomColumn);
+
+PrintArray(newArr);
+void PrintArray(int[,] inArray)
+{
+    for (int i = 0; i < inArray.GetLength(0); i++)
+    {
+        for (int j = 0; j < inArray.GetLength(1); j++)
+        {
+            Console.Write($"{inArray[i, j]} ");
+        }
+        Console.WriteLine();
+    }
+}
+
+
+int firstLine = newArr.GetLength(0) - 1;
+
+
+for (int i = 0; i < newArr.GetLength(0); i++)
+{
+
+}
+*/
+
+
+
+
+// https://docs.google.com/presentation/d/1gPVdqYdaVFewf03dZIvgFjEU8taNOlvClStNyZg6y9w/edit#slide=id.g117461e92d2_0_120
+
+
+// Задача 55: Задайте двумерный массив. Напишите программу, которая заменяет строки на столбцы. В случае, если это невозможно, программа должна вывести сообщение для пользователя.
+
+
+
+
+// Задача 57: Составить частотный словарь элементов двумерного массива. Частотный словарь содержит информацию о том, сколько раз встречается элемент входных данных.
+
+
+
+/*
+// C Семинара 8
+
+
+void PrintData(int[] inArray)
+{
+    int el = inArray[0];
+    int count = 1;
+    for (int i = 1; i < inArray.Length; i++)
+    {
+        if (inArray[i] != el)
+        {
+            WriteLine($"{el} встречается {count}");
+            el = inArray[i];
+            count = 1;
+        }
+        else
+        {
+            count++;
+        }
+    }
+    WriteLine($"{el} встречается {count}");
+}
+*/
+
+
+/*
+// Треугольник паскаля
+Clear();
+
+Write("Введите нужное количество строк треугольника Паскаля: ");
+int rows = int.Parse(ReadLine());
+PrintTriangle(rows);
+
+
+void PrintTriangle(int n)
+{
+    for (int i = 0; i < n; i++)
+    {
+        for (int c = 0; c <= (n - i); c++) // создаём после каждой строки n-i отступов от левой стороны консоли, чем ниже строка, тем меньше отступ
+        {
+            Write("  ");
+        }
+        for (int c = 0; c <= i; c++)
+        {
+            Write("   "); // создаём пробелы между элементами треугольника
+            Write(factorial(i) / (factorial(c) * factorial(i - c))); //формула вычисления элементов треугольника
+        }
+        WriteLine(); // после каждой строки с числами отступаем две пустые строчки
+    }
+}
+float factorial(int n)
+{
+    float x = 1;
+    for (int i = 1; i <= n; i++)
+    {
+        x *= i;
+    }
+    return x;
+}
+
+// https://github.com/guitaristdave/justkidding  Давид  треугольник паскаля
+*/
+
+
+/*
+if (array[row, i] < array[row, i + 1])
+            {
+                temp = array[row, i];
+                array[row, i] = array[row, i + 1];
+                array[row, i + 1] = temp;
+             }
+
+*/
