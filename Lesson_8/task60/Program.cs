@@ -13,12 +13,17 @@ int x = new Random().Next(3, 10);
 int z = new Random().Next(3, 10);
 
 // Проверяем что диапазон трехмерного массива не больше 99 
-while (x * y * z > 99)
+if (x * y * z > 99)
 {
-    y = new Random().Next(3, 10);
-    x = new Random().Next(3, 10);
-    z = new Random().Next(3, 10);
+    while (x * y * z > 99)
+    {
+        y = new Random().Next(3, 10);
+        x = new Random().Next(3, 10);
+        z = new Random().Next(3, 10);
+    }
 }
+
+
 // Создаем трехмерный рандомный массив 
 int[,,] myArray = CreateThreeArray(x, y, z);
 // Выводим массив на экран
