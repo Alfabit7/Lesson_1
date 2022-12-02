@@ -7,11 +7,13 @@
 15 18
 */
 
-int rows = new Random().Next(3, 5);
-int columns = new Random().Next(3, 5);
+// int rows = new Random().Next(2, 8);
+// int columns = new Random().Next(3, 9);
 
-int[,] myArray = CreateArray(rows, columns);
-int[,] myArray2 = CreateArray(rows, columns);
+// int[,] myArray = CreateArray(rows, columns);
+// int[,] myArray2 = CreateArray(rows, columns);
+int[,] myArray = CreateArray(4, 5);
+int[,] myArray2 = CreateArray(5, 2);
 Console.WriteLine();
 Console.WriteLine("Matrix A");
 PrintArray(myArray);
@@ -69,7 +71,7 @@ int[,] MultipliesMatrices(int[,] arr, int[,] arr1)
         printOnNotPrint = true;
         for (int i = 0; i < arr.GetLength(0); i++)
         {
-            for (int j = 0; j < arr.GetLength(1); j++)
+            for (int j = 0; j < arr1.GetLength(1); j++)
             {
                 for (int k = 0; k < arr.GetLength(1); k++)
                 {
